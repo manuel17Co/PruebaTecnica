@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form name="form">
+        <output id="mostar"></output>
+    </form>
+
+
+    <script>
+        
+        function cargar(){ 
+            var ruta1 = {
+                origen: 'manizales',
+                destino: 'pereira',
+                distancia: 30 
+            }
+            var ruta2 = {
+                origen: 'pereira',
+                destino: 'armenia',
+                distancia: 30 
+            }
+            var ruta3 = {
+                origen: 'armenia',
+                destino: 'cali',
+                distancia: 80 
+            }
+            var ruta4 = {
+                origen: 'pereira',
+                destino: 'cartago',
+                distancia: 10 
+            }
+            var ruta5 = {
+                origen: 'cartago',
+                destino: 'cali',
+                distancia: 40 
+            }
+            var ruta6 = {
+                origen: 'cartago',
+                destino: 'tolima',
+                distancia: 4 
+            }
+            var ruta7 = {
+                origen: 'tolima',
+                destino: 'cali',
+                distancia: 40 
+            }
+            var misRutas = [];
+            misRutas.push(ruta1);
+            misRutas.push(ruta2);
+            misRutas.push(ruta3);
+            misRutas.push(ruta4);
+            misRutas.push(ruta5);
+            misRutas.push(ruta6);
+            misRutas.push(ruta7);
+
+
+
+            var ciudadOrigen = 'manizales';
+            var ciudadDestino = 'cali';
+            var ciudadActual = ciudadOrigen;
+            var miCamino = [];
+
+            var idx = 0;
+            var menor = 0;
+            var bandera = false;
+
+            miCamino.push(ciudadActual);
+
+            while(ciudadActual !== ciudadDestino){
+                for(let i=0; i < misRutas.length; i++){
+                    if(ciudadActual === misRutas[i].origen && misRutas[i].destino === ciudadDestino){
+                        miCamino.push(ciudadDestino);
+                        bandera = true;
+                        break;
+                    }
+                }
+            
+                if(bandera) break;
+                    
+                for(let i=0; i<misRutas.length; i++){
+                    if(ciudadActual === misRutas[i].origen){
+                        idx = i;
+                        menor = misRutas[i].distancia;
+                        break;
+                    }
+                }
+
+                for(let i=idx; i<misRutas.length; i++){
+                    if(ciudadActual === misRutas[i].origen && misRutas[i].distancia < menor){
+                    idx = i;
+                    menor = misRutas[i].distancia;
+                    break;
+                    }
+                }
+
+                ciudadActual = misRutas[idx].destino;
+                miCamino.push(ciudadActual);
+            }    
+            console.log("Esta es la ruta mas rapida para llegar de Manizales a cali: " + miCamino);
+        }
+
+    </script>
+
+    <button name="misRutas" onclick="cargar()">Mostar ruta Corta</button>
+</body>
+</html>
